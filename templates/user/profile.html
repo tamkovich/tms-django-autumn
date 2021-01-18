@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+</head>
+<body>
+    <a href="{{ user.username }}">Ссылка</a>
+    <b>{{ user.username }}</b>
+    <p>{{ user.get_full_name }}</p>
+    <p>Телефон: {{ user.profile.phone }}</p>
+    <p>Страна: {{ user.profile.country }}</p>
+</body>
+</html>

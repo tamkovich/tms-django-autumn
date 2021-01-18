@@ -18,10 +18,6 @@ def debug(request):
     return HttpResponse(f"This is Debug URL. Page number {page}")
 
 
-def user(request, username):
-    return HttpResponse(f"This is user {username}")
-
-
 def all_articles(request):
     print(request.user)
     if request.user.is_authenticated:
