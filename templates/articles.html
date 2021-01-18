@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All article</title>
+</head>
+<body>
+    {% for article in articles %}
+        <div>
+            <a href="{{ article.pk }}">Ссылка</a>
+            <b>{{ article.title }}</b>
+            <p>{{ article.content }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
