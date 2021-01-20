@@ -21,16 +21,16 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
-                  <label for="formGroupExampleInput" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="enter username" value="{{ user.username }}">
+                  <label for="username" class="form-label">Username</label>
+                  <input name="username" type="text" class="form-control" id="username" placeholder="enter username" value="{{ user.username }}">
                 </div>
                 <div class="mb-3">
-                  <label for="formGroupExampleInput2" class="form-label">Phone</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Enter phone number" value="{{ user.profile.phone }}">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input name="phone" type="text" class="form-control" id="phone" placeholder="Enter phone number" value="{{ user.profile.phone }}">
                 </div>
                 <div class="mb-3">
-                  <label for="formGroupExampleInput2" class="form-label">Country from</label>
-                  <input type="text" class="form-control" id="country" placeholder="Enter country" value="{{ user.profile.country }}">
+                  <label for="country" class="form-label">Country from</label>
+                  <input name="country" type="text" class="form-control" id="country" placeholder="Enter country" value="{{ user.profile.country }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
