@@ -3,7 +3,7 @@ from django.urls import path
 from user_profile import views
 
 urlpatterns = [
-    path('<str:username>/', views.profile, name='user-profile'),
-    path('<str:username>/edit/', views.edit_profile, name='edit-profile'),
-    path('<str:username>/delete/', views.delete_profile, name='delete-profile')
+    path('<str:username>/', views.UserDetailView.as_view(), name='user-profile'),
+    path('<str:username>/edit/', views.UserUpdateView.as_view(), name='edit-profile'),
+    path('<str:username>/delete/', views.UserDeleteView.as_view(), name='delete-profile')
 ]

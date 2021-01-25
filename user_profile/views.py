@@ -1,14 +1,26 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 
 from user_profile.models import Profile
 
 
-@login_required
-def profile(request, username):
-    user = get_object_or_404(User, username=username)
-    return render(request, "user/profile.html", {"user": user})
+from django.views.generic import DetailView, DeleteView, UpdateView
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = "user/profile.html"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "user"
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    template_name = "user/edit_profile.html"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "user"
 
 
 def edit_profile(request, username):
@@ -24,13 +36,10 @@ def edit_profile(request, username):
     return render(request, "user/edit_profile.html", {"user": user})
 
 
-def delete_profile(request, username):
-    """
-    Фукнция удаляет пользователя при запросе POST,
-    и возвращает кнокпу на удаление пользователя при GET
-    """
-    user = get_object_or_404(User, username=username)
-    if request.method == 'POST':
-        user.delete()
-        return render(request, "user/successfully_delete_profile.html")
-    return render(request, "user/delete_profile.html", {"user": user})
+class UserDeleteView(DeleteView):
+    model = User
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    template_name = "user/delete_profile.html"
+    success_url = "/articles/"
+    context_object_name = "user"
