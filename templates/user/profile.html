@@ -27,6 +27,17 @@
             <a role="button" class="btn btn-danger" href="/{{ user.username }}/delete/">
                 Удалить пользователя "{{ user.username }}"
             </a>
+            <h3>User articles:</h3>
+            {% for article in articles %}
+                <div class="card" style="width: 18rem;">
+                  <img src="https://i.imgur.com/sTmQ0AM.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ article.title}}</h5>
+                    <p class="card-text">{{ article.content }}</p>
+                    <a href="{% url 'get-articles' pk=article.pk %}" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 

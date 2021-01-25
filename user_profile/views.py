@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 
 from django.views.generic import DetailView, DeleteView, UpdateView
 
+from home.models import Article
+
 
 class UserDetailView(DetailView):
     model = User
@@ -9,6 +11,11 @@ class UserDetailView(DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
     context_object_name = "user"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        context['articles'] = Article.objects.filter(author=context['user'])
+        return context
 
 
 class UserUpdateView(UpdateView):
