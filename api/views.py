@@ -1,32 +1,29 @@
-from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 from home.models import Article
-from api.serializers import ArticleSerializer
+from api.serializers import ArticleSerializer, UserSerializer
 
-from rest_framework.generics import ListAPIView
-
-
-def test(request):
-    return JsonResponse(
-        {
-            "date": "2020-27-01",
-            "group": "Z38",
-        }
-    )
+from rest_framework.generics import (
+    ListCreateAPIView, RetrieveUpdateDestroyAPIView
+)
 
 
-class ArticleListAPIView(ListAPIView):
+class ArticleListAPIView(ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
 
-def all_articles(request):
-    articles = Article.objects.all()
-    s = ArticleSerializer(articles, many=True)
-    return JsonResponse(s.data, safe=False)
+class ArticleDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 
 
-def get_article(request, pk):
-    article = Article.objects.filter(pk=pk)
-    s = ArticleSerializer(article)
-    return JsonResponse(s.data)
+class UserListAPIView(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = "username"

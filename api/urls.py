@@ -3,10 +3,16 @@ from django.urls import path
 from api import views
 
 urlpatterns = [
-    path('test/', views.test),
     path('articles/', views.ArticleListAPIView.as_view()),
-    path('articles/<int:pk>/', views.get_article),
-    # path('<str:username>/', views.UserDetailView.as_view(), name='user-profile'),
-    # path('<str:username>/edit/', views.UserUpdateView.as_view(), name='edit-profile'),
-    # path('<str:username>/delete/', views.UserDeleteView.as_view(), name='delete-profile')
+    path(
+        'articles/<int:pk>/',
+        views.ArticleDetailAPIView.as_view(),
+        name='api-one-article'
+    ),
+    path('users/', views.UserListAPIView.as_view(), name='api-users'),
+    path(
+        'users/<str:username>/',
+        views.UserDetailAPIView.as_view(),
+        name='api-one-user'
+    ),
 ]
