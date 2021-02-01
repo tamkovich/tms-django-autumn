@@ -13,7 +13,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'content', 'author', 'link']
 
     def get_link(self, obj):
-        uri = reverse('api-one-article', kwargs={'pk': obj.pk})
+        uri = reverse('articles-detail', kwargs={'pk': obj.pk})
         return self.context['request'].build_absolute_uri(uri)
 
 
@@ -34,5 +34,5 @@ class UserSerializer(serializers.ModelSerializer):
         return s.data
 
     def get_link(self, obj):
-        uri = reverse('api-one-user', kwargs={'username': obj.username})
+        uri = reverse('users-detail', kwargs={'username': obj.username})
         return self.context['request'].build_absolute_uri(uri)

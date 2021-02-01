@@ -1,18 +1,25 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from api import views
 
+
+router = DefaultRouter()
+router.register(
+    'articles', views.ArticleViewSet, basename="articles"
+)
+router.register(
+    'users', views.UserViewSet, basename="users"
+)
+"""
+/articles/ - GET / List
+/articles/ - POST / Create
+/articles/<int:pk>/ - GET / Read
+/articles/<int:pk>/ - DELETE / Delete
+/articles/<int:pk>/ - PUT / Update
+"""
+
+
 urlpatterns = [
-    path('articles/', views.ArticleListAPIView.as_view()),
-    path(
-        'articles/<int:pk>/',
-        views.ArticleDetailAPIView.as_view(),
-        name='api-one-article'
-    ),
-    path('users/', views.UserListAPIView.as_view(), name='api-users'),
-    path(
-        'users/<str:username>/',
-        views.UserDetailAPIView.as_view(),
-        name='api-one-user'
-    ),
+    path('', include(router.urls)),
 ]
