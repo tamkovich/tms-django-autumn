@@ -7,5 +7,8 @@ class Article(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    def __repr__(self):
+        return f"{self.title} - {self.content[:50]}"
+
     def __str__(self):
         return f"{self.title} - {self.content[:50]}"
