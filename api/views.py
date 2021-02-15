@@ -18,11 +18,11 @@ class ArticleViewSet(ModelViewSet):
     serializer_class = ArticleSerializer
     pagination_class = CustomPageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('title', 'content')
+    search_fields = ("title", "content")
 
 
 class UserViewSet(ModelViewSet):
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = "username"

@@ -14,7 +14,7 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(author=context['user'])
+        context["articles"] = Article.objects.filter(author=context["user"])
         return context
 
 
@@ -25,7 +25,7 @@ class UserUpdateView(UpdateView):
     slug_url_kwarg = "username"
     context_object_name = "user"
     fields = ["username", "first_name", "last_name"]
-    success_url = '/articles/'
+    success_url = "/articles/"
 
 
 class UserDeleteView(DeleteView):

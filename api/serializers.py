@@ -9,7 +9,7 @@ from user_profile.models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['country', 'phone', 'birth_date']
+        fields = ["country", "phone", "birth_date"]
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -17,20 +17,20 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'content', 'author', 'link']
+        fields = ["id", "title", "content", "author", "link"]
 
     def get_link(self, obj):
-        uri = reverse('articles-detail', kwargs={'pk': obj.pk})
-        return self.context['request'].build_absolute_uri(uri)
+        uri = reverse("articles-detail", kwargs={"pk": obj.pk})
+        return self.context["request"].build_absolute_uri(uri)
 
     def update(self, instance, validated_data):
-        request = self.context.get('request')
+        request = self.context.get("request")
         user = request.user
         if user.is_authenticated and instance.author_id == user.id:
             return super(ArticleSerializer, self).update(
                 instance, validated_data
             )
-        raise Exception('No credentials')
+        raise Exception("No credentials")
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,8 +41,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id', 'first_name', 'last_name', 'username',
-            'articles', 'link', 'profile'
+            "id",
+            "first_name",
+            "last_name",
+            "username",
+            "articles",
+            "link",
+            "profile",
         ]
 
     def get_articles(self, obj):
@@ -51,5 +56,5 @@ class UserSerializer(serializers.ModelSerializer):
         return s.data
 
     def get_link(self, obj):
-        uri = reverse('users-detail', kwargs={'username': obj.username})
-        return self.context['request'].build_absolute_uri(uri)
+        uri = reverse("users-detail", kwargs={"username": obj.username})
+        return self.context["request"].build_absolute_uri(uri)

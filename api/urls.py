@@ -5,12 +5,8 @@ from api import views
 
 
 router = DefaultRouter()
-router.register(
-    'articles', views.ArticleViewSet, basename="articles"
-)
-router.register(
-    'users', views.UserViewSet, basename="users"
-)
+router.register("articles", views.ArticleViewSet, basename="articles")
+router.register("users", views.UserViewSet, basename="users")
 """
 /articles/ - GET / List
 /articles/ - POST / Create
@@ -21,5 +17,5 @@ router.register(
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]
