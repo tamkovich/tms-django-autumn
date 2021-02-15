@@ -27,9 +27,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         user = request.user
         if user.is_authenticated and instance.author_id == user.id:
-            return super(ArticleSerializer, self).update(
-                instance, validated_data
-            )
+            return super(ArticleSerializer, self).update(instance, validated_data)
         raise Exception("No credentials")
 
 
