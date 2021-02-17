@@ -26,6 +26,13 @@
                     </a>
                     <b>{{ article.title }}</b>
                     <p>{{ article.content }}</p>
+                    <h1>avatar:</h1>
+                    {% if article.avatar %}
+                    <img src="{{ article.avatar.url }}" alt="">
+                    {% endif %}
+                    {% for image in article.image_set.all %}
+                        <img src="{{ image.image.url }}" alt="">
+                    {% endfor %}
                     <hr>
                 </div>
             {% endfor %}

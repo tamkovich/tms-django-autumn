@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.pagination import LimitOffsetPagination
 
@@ -9,7 +10,7 @@ from home.models import Article
 
 from api.pagination import CustomPageNumberPagination
 from api.permissions import IsAuthorOrReadOnly
-from api.serializers import ArticleSerializer, UserSerializer
+from api.serializers import ArticleSerializer, UserSerializer, RegisterSerializer
 
 
 class ArticleViewSet(ModelViewSet):
@@ -27,3 +28,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     lookup_field = "username"
     pagination_class = LimitOffsetPagination
+
+
+class RegisterView(CreateAPIView):
+    serializer_class = RegisterSerializer

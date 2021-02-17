@@ -12,6 +12,9 @@
         <a href="{{ obj.pk }}">Ссылка</a>
         <b>{{ obj.title }}</b>
         <p>{{ obj.content }}</p>
+        {% if obj.image %}
+        <img src="{{ obj.image.url }}" alt="">
+        {% endif %}
     </div>
     <hr>
 </body>

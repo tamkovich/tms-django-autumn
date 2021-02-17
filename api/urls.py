@@ -16,4 +16,7 @@ router.register("users", views.UserViewSet, basename="users")
 """
 
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("", include(router.urls)),
+    path("sign-up", views.RegisterView.as_view(), name="all-articles"),
+]
